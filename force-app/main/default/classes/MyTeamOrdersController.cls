@@ -1,7 +1,10 @@
 public without sharing class MyTeamOrdersController {
+    /* Ici la requête n'est pas correcte : prendre en compte le propriétaire de l'opportunité*/
+
     public decimal SumOders{
         get{
-			AggregateResult groupedResults = [SELECT SUM(TotalAmount) total FROM Order];
+			AggregateResult groupedResults = [SELECT SUM(TotalAmount) total 
+                                              FROM Order];
 			return (decimal)groupedResults.get('total');
 
         }

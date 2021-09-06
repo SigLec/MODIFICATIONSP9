@@ -25,4 +25,10 @@ global class UpdateAccounts implements Database.Batchable<sObject>{
     global void finish(Database.BatchableContext info){     
         
     } 
+    /* CODE DE UpdateAllAccounts
+    global void execute(Database.BatchableContext info, List<Account> scope){
+        
+        Set<Id> setAccountIds = (new Map<Id,SObject>(scope)).keySet();
+        AP01Account.updateChiffreAffaire(setAccountIds);
+    } */    
  }

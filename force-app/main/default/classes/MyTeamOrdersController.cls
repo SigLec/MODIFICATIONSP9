@@ -1,12 +1,14 @@
 public without sharing class MyTeamOrdersController {
-    /* Ici la requête n'est pas correcte : prendre en compte le propriétaire de l'opportunité*/
 
-    public decimal SumOders{
+    // Query that return orders amount by commercial 
+    public decimal OdersAmountByCommercial {
         get{
-			AggregateResult groupedResults = [SELECT SUM(TotalAmount) total 
-                                              FROM Order];
+			AggregateResult groupedResults = [SELECT SUM(TotalAmount) total, 
+                                              Owner.Name owner  
+                                              FROM Order 
+                                              WHERE Status='Activated'
+                                              GROUP BY Owner.Name];
 			return (decimal)groupedResults.get('total');
-
         }
         set;
     }

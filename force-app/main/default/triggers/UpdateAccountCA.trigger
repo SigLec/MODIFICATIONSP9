@@ -1,5 +1,5 @@
 trigger UpdateAccountCA on Order (after insert, after update, after delete, after undelete) {
-	// trigger now activated when an order is inserted, updates, deleted or undeleted
+	// trigger now activated when an order is inserted, updated, deleted or undeleted
 
     set<Id> setAccountIds = new set<Id>();
     
@@ -14,7 +14,8 @@ trigger UpdateAccountCA on Order (after insert, after update, after delete, afte
         /* Bug detected : error message when we are creating a new order. If the chiffre_d_affaire field is
         empty or equal to 0, we can't crate a new order.
         Add a if/else block to fix the code */   
-        if(acc.Chiffre_d_affaire__c != null || acc.Chiffre_d_affaire__c != null) {
+
+        if(acc.Chiffre_d_affaire__c != null) {
             acc.Chiffre_d_affaire__c = acc.Chiffre_d_affaire__c + newOrder.TotalAmount;
         } else {
             acc.Chiffre_d_affaire__c = newOrder.TotalAmount;

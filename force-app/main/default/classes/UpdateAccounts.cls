@@ -1,11 +1,13 @@
 global class UpdateAccounts implements Database.Batchable<sObject>{
-    
+    // The batch job starts
     global Database.QueryLocator start(Database.BatchableContext info){ 
         //Requeter seulement les comptes qui ont au moins une commande avec le Status 'Ordered'
+        // String query = 'SELECT COUNT(Id), AccoutnId FROM Contact GROUP BY AccountId';
         return Database.getQueryLocator('SELECT Id FROM Account');
- 
+        // return Database.getQueryLocator(query);
     }
      
+    // The batch job executes and operates on one batch of records
     global void execute(Database.BatchableContext info, List<Account> scope){      
         list<Order> listOrders =  [SELECT Id, TotalAmount, AccountId FROM Order];
         
@@ -21,7 +23,7 @@ global class UpdateAccounts implements Database.Batchable<sObject>{
         
         update scope;
     }    
-     
+    // The batch job finishes
     global void finish(Database.BatchableContext info){     
         
     } 

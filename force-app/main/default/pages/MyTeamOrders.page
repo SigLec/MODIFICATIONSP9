@@ -1,8 +1,12 @@
-
-<apex:page controller="MyTeamOrdersController" >
-    <div>
-        <h1>
-            Sum of my team orders: <apex:outputText value="{!SumOders}" />
-        </h1>
-    </div>
+<apex:page controller="MyTeamOrdersController">
+   <apex:pageBlock>
+       <apex:pageBlockTable value="{!aggregate}" var="a">
+           <apex:column value="{!a['oName']}">
+               <apex:facet name="header">Commercial</apex:facet>
+           </apex:column>
+           <apex:column value="{!a['tAmount']} €">
+               <apex:facet name="header">Somme totale</apex:facet>
+           </apex:column>
+       </apex:pageBlockTable>
+   </apex:pageBlock>
 </apex:page>

@@ -10,6 +10,8 @@ global class UpdateAccounts implements Database.Batchable<sObject>{
     // The batch job executes and operates on one batch of records
     global void execute(Database.BatchableContext info, List<Account> scope){      
         list<Order> listOrders =  [SELECT Id, TotalAmount, AccountId FROM Order];
+        // Ajouter un WHERE qui limite : pas tous les comptes mais seulement ceux qui ont un order au status 'ordered' ou 'actiavted'
+        // Bouger la requête et possibilité de laisser la formule calcul CA
         
          for(integer i=0; i < scope.size(); i++){
              Account myAccount = scope[i];

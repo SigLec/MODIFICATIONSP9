@@ -1,5 +1,6 @@
 trigger UpdateAccountCA on Order (after insert, after update, after delete, after undelete) {
 	// trigger now activated when an order is inserted, updated, deleted or undeleted
+    // Mettre cette requête dans une nouvelle classe puis l'appeler dans le trigger
 
     set<Id> setAccountIds = new set<Id>();
     
@@ -7,7 +8,7 @@ trigger UpdateAccountCA on Order (after insert, after update, after delete, afte
         Order newOrder= trigger.new[i];
        
         // Query modifications to have only activated Orders 
-        Account acc = [SELECT Id, Chiffre_d_affaire__c,(SELECT Status FROM Orders WHERE Status='Activated')
+        Account acc = [SELECT Id, Chiffre_d_affaire__c
                        FROM Account 
                        WHERE Id =:newOrder.AccountId];
 

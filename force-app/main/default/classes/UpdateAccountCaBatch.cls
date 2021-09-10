@@ -1,18 +1,15 @@
-global class UpdateAccounts implements Database.Batchable<sObject>{
+global class UpdateAccountCaBatch implements Database.Batchable<sObject>{
     // The batch job starts
     global Database.QueryLocator start(Database.BatchableContext info){ 
-        //Requeter seulement les comptes qui ont au moins une commande avec le Status 'Ordered'
-        // String query = 'SELECT COUNT(Id), AccoutnId FROM Contact GROUP BY AccountId';
-        return Database.getQueryLocator('SELECT Id FROM Account');
-        // return Database.getQueryLocator(query);
+        // Add query from AccountUtility class as parameter
+        String batchQuery = AccountUtility.selectAcctsWithActivatedOrders();
+        return Database.batchQuery();
     }
      
     // The batch job executes and operates on one batch of records
     global void execute(Database.BatchableContext info, List<Account> scope){      
-        list<Order> listOrders =  [SELECT Id, TotalAmount, AccountId FROM Order];
-        // Ajouter un WHERE qui limite : pas tous les comptes mais seulement ceux qui ont un order au status 'ordered' ou 'actiavted'
-        // Bouger la requête et possibilité de laisser la formule calcul CA
-        
+        // Ajouter ici la formule de calcul CA
+        list<Order> listOrders =  [SELECT Id, TotalAmount, AccountId FROM Order];        
          for(integer i=0; i < scope.size(); i++){
              Account myAccount = scope[i];
              myAccount.Chiffre_d_affaire__c = 0;
@@ -22,7 +19,6 @@ global class UpdateAccounts implements Database.Batchable<sObject>{
                 }                   
             }
         }
-        
         update scope;
     }    
     // The batch job finishes

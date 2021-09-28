@@ -1,10 +1,12 @@
 global class AccountTurnoverBatch implements Database.Batchable<sObject> {
 
     global Database.QueryLocator start(Database.BatchableContext info){
-        return Database.getQueryLocator('SELECT Id, (SELECT TotalAmount FROM Orders WHERE Status=\'Activated\') FROM Account WHERE Id IN (SELECT AccountId FROM Order WHERE Status=\'Activated\')');
+        // Select totalAmount from accounts with activated orders
+        String queryForBatch = QueryService.getAccountsToUpdateInBtach();
+        return Database.getQueryLocator(queryForBatch);
     }
-    global void execute(Database.BatchableContext info, List<Account> accountsWithOrders){
-        AccountBatchUtility.calculCAForBatch(accountsWithOrders);
+    global void execute(Database.BatchableContext info, List<Account> acctsWithOrders){
+        AccountUtility.calculTurnover(acctsWithOrders);
     }
 
     global void finish(Database.BatchableContext info){

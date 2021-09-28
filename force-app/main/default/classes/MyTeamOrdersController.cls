@@ -8,6 +8,6 @@ public with sharing class MyTeamOrdersController {
         aggregate = [SELECT SUM(TotalAmount) tAmount, owner.Name oName 
                   FROM Order 
                   WHERE Status='Activated'
-                  GROUP BY owner.Name];
+                  GROUP BY owner.Name ORDER BY SUM(TotalAmount) DESC];
         }
 }

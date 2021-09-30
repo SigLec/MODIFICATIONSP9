@@ -6,13 +6,14 @@ private class MyTeamOrdersControllerTest {
         Integer numOrders = 3;
         Integer unitPrice = 8;
         Integer quantity = 6;
+        //Use TestFactory Data
         List<Account> testAccounts = TestFactory.generateAccountsList(numAccts);
         List<Order> testOrders = TestFactory.generateOrdersForAccounts(testAccounts, numOrders, unitPrice, quantity);
         for (Order order : testOrders) {
-            order.Status = 'Activated';
+            order.Status = 'Ordered';
         }
         update testOrders;
-
+        
         User u1 = TestFactory.generateUser('Paul', 'BOLI');
         User u2 = TestFactory.generateUser('Pierre', 'LOPARE');
 

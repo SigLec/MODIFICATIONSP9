@@ -6,10 +6,11 @@ private class AccountTurnoverBatchTest {
         Integer numOrders = 120;
         Integer UnitPrice = 10;
         Integer quantity = 5;
+        //Use TestFactory data 
         List<Account> testAccounts = TestFactory.generateAccountsList(numAccts);
         List<Order> testOrders = TestFactory.generateOrdersForAccounts(testAccounts, numOrders, UnitPrice, quantity);
         for (Order order : testOrders) {
-            order.Status = 'Activated';
+            order.Status = 'Ordered';
         }
         update testOrders;
     }
@@ -23,7 +24,7 @@ private class AccountTurnoverBatchTest {
 
         List<Account> results = [SELECT Id, Turnover__c
                                     FROM Account
-                                    WHERE Id IN (SELECT AccountId FROM Order WHERE Status='Activated')];
+                                    WHERE Id IN (SELECT AccountId FROM Order WHERE Status='Ordered')];
 
         System.assertEquals(10, results.size());
         for(Account account : results){

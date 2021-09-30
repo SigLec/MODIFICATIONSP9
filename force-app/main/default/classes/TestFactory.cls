@@ -1,3 +1,7 @@
+/**
+ * Description this class is used to set up data we need for tests application
+ */
+@isTest
 public class TestFactory {
 
     // Create a List of accounts

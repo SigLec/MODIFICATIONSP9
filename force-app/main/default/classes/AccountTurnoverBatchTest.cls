@@ -16,7 +16,7 @@ private class AccountTurnoverBatchTest {
     }
 
     // Calculation turnover test
-    @isTest static void test_whenBatchExecutedWith10Accounts_shouldReturnUpdatedTurnover() {
+    @isTest static void testBatchExecution() {
         Test.startTest();
         AccountTurnoverBatch atb = new AccountTurnoverBatch();
         Id batchId = DataBase.executeBatch(atb); 

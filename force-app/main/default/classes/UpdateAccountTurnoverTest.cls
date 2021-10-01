@@ -1,6 +1,6 @@
 @isTest
 private class UpdateAccountTurnoverTest {
-    @isTest static void test_AccountTurnover_with10AccountsAnd105OrderedOrders() {
+    @isTest static void testUpdateTurnoverFor105Orders() {
         Integer numAccts = 10;
         Integer numOrders = 105;
         Integer UnitPrice = 10;
@@ -27,7 +27,7 @@ private class UpdateAccountTurnoverTest {
         }
     }
 
-    @isTest static void test_AccountTurnover_withOneAccountAnd201OrderedOrders() {
+    @isTest static void testUpdateTurnoverFor201Orders() {
         Integer numAccts = 1;
         Integer numOrders = 201;
         Integer UnitPrice = 10;

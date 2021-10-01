@@ -2,8 +2,6 @@
  * @description This batch class is used to update account turnover each week to take into account new prices
  */
 
-
-
 global class AccountTurnoverBatch implements Database.Batchable<sObject> {
     //The batch job starts
     global Database.QueryLocator start(Database.BatchableContext info){
